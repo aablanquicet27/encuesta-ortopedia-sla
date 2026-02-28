@@ -6,7 +6,28 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Encuesta SLA - Inestabilidad de Hombro',
-  description: 'Encuesta sobre inestabilidad traumatica de hombro para ortopedas - Sociedad Latinoamericana de Artroscopia',
+  description: 'Encuesta sobre inestabilidad traumática de hombro para ortopedistas - Sociedad Latinoamericana de Artroscopia.',
+  openGraph: {
+    title: 'Encuesta SLA - Inestabilidad de Hombro',
+    description: 'Participe en la encuesta sobre inestabilidad traumática de hombro para ortopedistas de la Sociedad Latinoamericana de Artroscopia.',
+    siteName: 'SLA - Sociedad Latinoamericana de Artroscopia',
+    images: [
+      {
+        url: '/logo-artroscopia.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Sociedad Latinoamericana de Artroscopia',
+      },
+    ],
+    locale: 'es_LA',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Encuesta SLA - Inestabilidad de Hombro',
+    description: 'Participe en la encuesta sobre inestabilidad traumática de hombro para ortopedistas.',
+    images: ['/logo-artroscopia.jpg'],
+  },
 };
 
 export default function RootLayout({
