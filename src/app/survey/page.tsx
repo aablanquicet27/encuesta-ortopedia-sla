@@ -7,7 +7,8 @@ import { supabase } from '@/lib/supabase';
 import { surveyDomains, getQuestionText, getDomainTitle } from '@/lib/questions';
 import { getLikertScale } from '@/lib/translations';
 import { useLanguage } from '@/lib/language-context';
-import { CheckCircle2, ChevronRight, ChevronLeft, AlertCircle, Loader2, Sparkles, Shield, Database, Globe } from 'lucide-react';
+import { CheckCircle2, ChevronRight, ChevronLeft, AlertCircle, Loader2, Sparkles, Shield, Database, Globe, BarChart3 } from 'lucide-react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Language } from '@/lib/translations';
 
@@ -207,6 +208,13 @@ export default function SurveyPage() {
   };
 
   if (success) {
+    const successTranslations = {
+      es: { viewResults: 'Ver Resultados en Vivo', redirecting: 'Redirigiendo a resultados...' },
+      pt: { viewResults: 'Ver Resultados ao Vivo', redirecting: 'Redirecionando para resultados...' },
+      en: { viewResults: 'View Live Results', redirecting: 'Redirecting to results...' },
+    };
+    const st = successTranslations[lang];
+
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-6">
         <motion.div
@@ -239,14 +247,30 @@ export default function SurveyPage() {
           >
             {t.successMessage}
           </motion.p>
-          <motion.button
+          
+          {/* Primary CTA - View Results */}
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+          >
+            <Link
+              href="/results"
+              className="inline-flex items-center justify-center w-full px-10 py-4 bg-gradient-to-r from-brand-500 to-brand-600 text-white font-bold rounded-2xl hover:from-brand-600 hover:to-brand-700 transition-all shadow-lg shadow-brand-200 text-lg"
+            >
+              <BarChart3 className="w-5 h-5 mr-2" />
+              {st.viewResults}
+            </Link>
+          </motion.div>
+          
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => router.push('/')}
-            className="mt-6 px-10 py-4 bg-gradient-to-r from-brand-500 to-brand-600 text-white font-bold rounded-2xl hover:from-brand-600 hover:to-brand-700 transition-all shadow-lg shadow-brand-200 inline-block text-lg"
+            className="text-slate-500 hover:text-slate-700 font-medium text-sm transition-colors"
           >
             {t.backToHome}
           </motion.button>
