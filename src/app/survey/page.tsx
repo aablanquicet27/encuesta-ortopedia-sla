@@ -350,10 +350,10 @@ export default function SurveyPage() {
                 {/* AGAPAI Logo and branding */}
                 <div className="text-center pb-6 border-b border-slate-100">
                   <Image
-                    src="/logo-agapai.svg"
+                    src="/logo-agapai.png"
                     alt="AGAPAI"
                     width={150}
-                    height={45}
+                    height={50}
                     className="mx-auto mb-4"
                   />
                   <p className="text-sm text-slate-500">Tecnología para la investigación médica</p>

@@ -95,10 +95,10 @@ export default function Home() {
             <div className="mt-6 pt-6 border-t border-slate-200/60 w-full flex flex-col items-center">
               <p className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Powered by</p>
               <Image 
-                src="/logo-agapai.svg" 
+                src="/logo-agapai.png" 
                 alt="AGAPAI"
                 width={120}
-                height={36}
+                height={40}
               />
             </div>
           </div>
