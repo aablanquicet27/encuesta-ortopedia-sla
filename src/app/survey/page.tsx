@@ -143,18 +143,38 @@ export default function SurveyPage() {
         throw new Error('Faltan preguntas por responder.');
       }
 
-      const { data: pData, error: pError } = await supabase
+      const participantPayload = {
+        name: participant.name,
+        age: parseInt(participant.age),
+        country: participant.country,
+        specialty: participant.specialty,
+        experience_years: parseInt(participant.experience_years),
+        language: lang,
+      };
+
+      let participantInsert = await supabase
         .from('ortopedas_participants')
-        .insert([{
+        .insert([participantPayload])
+        .select('id')
+        .single();
+
+      // Compatibilidad con bases que aún no tienen la columna `language`.
+      if (participantInsert.error?.message?.includes("'language' column")) {
+        const participantPayloadWithoutLanguage = {
           name: participant.name,
           age: parseInt(participant.age),
           country: participant.country,
           specialty: participant.specialty,
           experience_years: parseInt(participant.experience_years),
-          language: lang,
-        }])
-        .select('id')
-        .single();
+        };
+        participantInsert = await supabase
+          .from('ortopedas_participants')
+          .insert([participantPayloadWithoutLanguage])
+          .select('id')
+          .single();
+      }
+
+      const { data: pData, error: pError } = participantInsert;
 
       if (pError) throw pError;
       if (!pData) throw new Error('Error al guardar datos del participante');

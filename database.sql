@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS public.ortopedas_participants (
   country TEXT NOT NULL,
   specialty TEXT NOT NULL,
   experience_years INTEGER NOT NULL,
+  language TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -21,6 +22,9 @@ CREATE TABLE IF NOT EXISTS public.ortopedas_responses (
   q23 INTEGER, q24 INTEGER, q25 INTEGER, q26 INTEGER, q27 INTEGER,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+ALTER TABLE public.ortopedas_participants
+ADD COLUMN IF NOT EXISTS language TEXT;
 
 -- Si deseas permitir inserciones anónimas desde el cliente (RLS)
 ALTER TABLE public.ortopedas_participants ENABLE ROW LEVEL SECURITY;
